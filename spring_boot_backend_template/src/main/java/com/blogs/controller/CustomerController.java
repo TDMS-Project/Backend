@@ -41,7 +41,7 @@ public class CustomerController {
         Customer createdCustomer = customerService.addCustomer(customer);
         return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
     }
-
+    
     // Get customer by ID
     @GetMapping("/{userId}")
     public ResponseEntity<Customer> getCustomer(@PathVariable int userId) {
@@ -52,6 +52,8 @@ public class CustomerController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    
+    
     
     @DeleteMapping({"/userId"})
     public String deleteCustomer(@PathVariable int userId) {

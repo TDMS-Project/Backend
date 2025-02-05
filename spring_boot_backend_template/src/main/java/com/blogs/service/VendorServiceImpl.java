@@ -2,14 +2,20 @@ package com.blogs.service;
 
 import com.blogs.dao.MenuItemsDao;
 import com.blogs.dao.MenuTypeDao;
+import com.blogs.dao.OrderDao;
+import com.blogs.dao.UserDao;
 import com.blogs.dao.VendorDao;
 import com.blogs.dtos.MenuItemsWithMenuType;
+import com.blogs.dtos.OrdersResponseDtos;
 import com.blogs.pojos.MenuItems;
 import com.blogs.pojos.MenuType;
+import com.blogs.pojos.Order;
+import com.blogs.pojos.User;
 import com.blogs.pojos.Vendor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VendorServiceImpl implements VendorService {
@@ -21,7 +27,13 @@ public class VendorServiceImpl implements VendorService {
     private VendorDao vendorRepository;
 
     @Autowired
+    private OrderDao orderRepository;
+    
+    @Autowired
     private MenuTypeDao menuTypeRepository;
+    
+    @Autowired
+    private UserDao userRepository;
 
     // ✅ Add a Menu Item and set Menu Type & Vendor
     @Override
@@ -67,5 +79,42 @@ public class VendorServiceImpl implements VendorService {
 		       return vendorRepository.findByRoleRoleID(roleId);
 	}
 
+
+	@Override
+	public List<Order> getAllOrders(int vendorId) {
+		// TODO Auto-generated method stub
+		return orderRepository.findByVendorUserID(vendorId);
+	}
+
+
+	@Override
+	public Vendor getVendorById(int vendorId) {
+		// TODO Auto-generated method stub
+		  return vendorRepository.findById(vendorId).orElse(null);
+	}
+
+	@Override
+	public User updateVendorProfile(Integer vendorId, User updatedVendor) {
+		// TODO Auto-generated method stub
+		Optional<User> optionalCustomer = userRepository.findById(vendorId);
+
+        if (optionalCustomer.isPresent()) {
+            User existingCustomer = optionalCustomer.get();
+            existingCustomer.setEmail(updatedVendor.getEmail());
+            existingCustomer.setPassword(updatedVendor.getPassword());
+            existingCustomer.setContactNo(updatedVendor.getContactNo());
+            existingCustomer.setAddress(updatedVendor.getAddress());
+            existingCustomer.setFname(updatedVendor.getFname());
+            existingCustomer.setLname(updatedVendor.getLname());
+
+            return userRepository.save(existingCustomer);
+        } else {
+            throw new RuntimeException("Customer not found");
+        }
+	}
+
+	
+   
+    
 	
 }
