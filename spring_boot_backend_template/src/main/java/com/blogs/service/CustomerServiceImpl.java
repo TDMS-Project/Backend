@@ -49,6 +49,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private OrderDao orderRepository;
     
+    
+    
     @Autowired
     private FeedBackDao feedbackRepository;
     
@@ -144,8 +146,20 @@ public class CustomerServiceImpl implements CustomerService {
 			 feedbackRepository.save(feedback) ;
 			 return "Thank you for your feedback!";
 		}
-        
 
+		@Override
+		public List<MenuItems> getMenuItems() {
+			// TODO Auto-generated method stub
+			return menu.findAll();
+		}
+        
+		@Override
+		public List<Vendor> getAllVendors(int roleId) {
+			// TODO Auto-generated method stub
+			return vendorRepository.findByRoleRoleID(roleId);
+		}
+
+		
 }
         
         

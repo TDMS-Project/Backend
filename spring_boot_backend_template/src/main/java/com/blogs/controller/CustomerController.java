@@ -20,7 +20,9 @@ import com.blogs.pojos.MenuItems;
 import com.blogs.pojos.Order;
 import com.blogs.pojos.OrderItems;
 import com.blogs.pojos.User;
+import com.blogs.pojos.Vendor;
 import com.blogs.service.CustomerService;
+import com.blogs.service.VendorService;
 
 
 @RestController
@@ -30,6 +32,8 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
     
+    @Autowired
+    private VendorService vendorService;
    
     // Add new customer
     @PostMapping("/add")
@@ -86,4 +90,16 @@ public class CustomerController {
     public String addFeedBack(@RequestBody FeedBack feedback) {
     	return customerService.addFeedBack(feedback);
     }
+    
+    @GetMapping
+    public List<MenuItems> getAllMenuItems(){
+    return customerService.getMenuItems();
+    }
+    
+    @GetMapping("/vendorList/{roleId}")
+    public List<Vendor> getVendorList(@PathVariable int roleId){
+		return  vendorService.getAllVendors(roleId);
+    }
+    
+    
 }

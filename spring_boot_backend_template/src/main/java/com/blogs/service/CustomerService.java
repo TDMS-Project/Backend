@@ -8,6 +8,7 @@ import com.blogs.pojos.MenuItems;
 import com.blogs.pojos.Order;
 import com.blogs.pojos.OrderItems;
 import com.blogs.pojos.User;
+import com.blogs.pojos.Vendor;
 
 public interface CustomerService {
     // Add new customer
@@ -29,6 +30,12 @@ public interface CustomerService {
 	List<Order> getOrdersForCustomer(int userID);
 	
 	String addFeedBack(FeedBack feedback);
+
+	List<MenuItems> getMenuItems();
+
+	List<Vendor> getAllVendors(int roleId);
+
+//	User getCustomerById1(int i);
 	
 	
 }

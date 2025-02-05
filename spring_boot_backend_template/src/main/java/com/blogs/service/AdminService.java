@@ -37,4 +37,7 @@ public interface AdminService {
 	List<FeedBack> getFeedBacks();
 
 	
+     User getAdminById(Integer adminId);
+	
+	
 }

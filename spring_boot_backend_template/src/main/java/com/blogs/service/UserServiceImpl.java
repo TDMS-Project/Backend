@@ -2,8 +2,12 @@ package com.blogs.service;
 
 import com.blogs.dao.RoleDao;
 import com.blogs.dao.UserDao;
+import com.blogs.dtos.AuthDto;
 import com.blogs.pojos.User;
 import com.blogs.pojos.Role;
+
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +32,22 @@ public class UserServiceImpl implements UserService {
 
 
    
-    public User getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+    @Override
+    public User authenticateUser(String email, String password) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        
+        if (userOptional.isEmpty()) {
+            throw new RuntimeException("User not found!");
+        }
+
+        User user = userOptional.get();
+
+        // Check password (plain text comparison)
+        if (!user.getPassword().equals(password)) {
+            throw new RuntimeException("Invalid password!");
+        }
+
+        return user;
     }
 
     @Override

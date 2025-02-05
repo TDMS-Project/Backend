@@ -23,7 +23,7 @@ public class VendorController {
             @RequestBody MenuItemsWithMenuType menuItemDto) {
         MenuItems menuItem = vendorService.addMenuItem(menuItemDto, vendorId);
         return ResponseEntity.ok(menuItem);
-    }
+      }
 
     // ✅ Get all menu items by vendor ID
     @GetMapping("/{vendorId}/menu-items")

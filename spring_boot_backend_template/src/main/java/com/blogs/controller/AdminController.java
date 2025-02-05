@@ -101,5 +101,11 @@ public class AdminController {
     	
     }
     
+    @GetMapping
+    public User getProfile() {
+		return adminService.getAdminById(2);
+    	
+    }
+    
     
 }

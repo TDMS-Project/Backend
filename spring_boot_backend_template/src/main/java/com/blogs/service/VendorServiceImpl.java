@@ -60,4 +60,12 @@ public class VendorServiceImpl implements VendorService {
                 .orElseThrow(() -> new RuntimeException("Vendor not found"));
         return menuItemsRepository.findByVendor(vendor);
     }
+
+    @Override
+	public List<Vendor> getAllVendors(int roleId) {
+		// TODO Auto-generated method stub
+		       return vendorRepository.findByRoleRoleID(roleId);
+	}
+
+	
 }

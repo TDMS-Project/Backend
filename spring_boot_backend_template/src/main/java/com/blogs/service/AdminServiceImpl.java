@@ -158,5 +158,15 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 
+	 public User getAdminById(Integer adminId) {
+	        Optional<User> admin = userRepository.findById(adminId);
+	        if (admin.isPresent() && admin.get().getRole().getRoleID() == 2) {
+	            return admin.get();
+	        } else {
+	            throw new RuntimeException("Admin not found with id: " + adminId);
+	        }
+	    }
+
+
 	
 }
